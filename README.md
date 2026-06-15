@@ -282,7 +282,7 @@ This solution enables stakeholders to:
 For a complete business insights report, see:
 
 
-(Docs/EXECUTIVE_SUMMARY.md)
+**[EXECUTIVE SUMMARY](Docs/EXECUTIVE_SUMMARY.md)**
 
 
 ---

@@ -1,347 +1,118 @@
-# 📊 Cosmetics E-Commerce Sales & Consumer Behavior Analytics
+# 📊 Cosmetics E-Commerce Sales & Customer Behavior Analytics  
+**End-to-End SQL Server & Power BI Project**
 
-**End-to-End Data Engineering & Analytics Project using SQL Server (T-SQL) & Power BI**
+---
+
+## 📌 Overview  
+This project transforms raw e-commerce web logs from a cosmetics marketplace into a structured analytical solution using SQL Server and Power BI.
+
+The goal is to understand customer behavior, improve retention, and identify high-value customers through data-driven insights.
+
+The project includes:
+- Data cleaning & preprocessing
+- Star schema data warehouse design
+- SQL-based analytics
+- RFM customer segmentation
+- Interactive Power BI dashboard
 
 ---
 
-## 📌 Project Overview
+## 🎯 Business Problem  
+E-commerce businesses often struggle to understand customer behavior beyond basic sales metrics.
 
-This project transforms raw operational e-commerce web logs from a large-scale **Cosmetics & Beauty marketplace** into a structured analytical solution using **SQL Server** and **Power BI**.
+This project answers key business questions:
 
-The pipeline covers:
-
-- Data staging and cleansing
-- Star Schema warehouse design
-- Business logic enrichment
-- Advanced SQL analytics
-- Interactive dashboard development
-
-The final solution delivers executive-level insights for data-driven decision making.
-
----
-## 🎯 Business Problem Statement
-
-E-commerce businesses often struggle with understanding customer behavior beyond basic sales metrics. In this project, the goal is to analyze customer interactions in a cosmetics e-commerce platform to answer key business questions:
-
-- Why do customers drop off during the purchase journey?
-- Which customers are driving the majority of revenue?
+- Where do customers drop off in the purchase journey?
+- Which customers generate the most revenue?
 - How can we identify and prioritize high-value customers?
-- How can we segment customers to improve marketing and retention strategies?
-
-The objective is to transform raw behavioral data into actionable business insights that support marketing optimization, customer retention, and revenue growth.
-
----
-## 📷 Dashboard Preview
-
-<p align = "center" > <img src = "Screenshots/Dashboard.png" width = "500" 
-                        </p>
+- How can customer segmentation improve marketing strategies?
 
 ---
 
-## 🛠️ Tech Stack & Skills Demonstrated
-
-### Database Engine
-- SQL Server (T-SQL)
-
-### Data Architecture
-- Staging Layer
-- Star Schema Modeling
-- Surrogate Key Management (`IDENTITY`)
-
-### Advanced SQL
-- CTEs
-- Window Functions
-  - `ROW_NUMBER()`
-  - `NTILE()`
-  - `LAG()`
-- Aggregations
-- Percentile Analysis (`PERCENTILE_DISC`)
-- Relational Offsets
-
-### Power BI
-- Interactive Dashboards
-- KPI Cards
-- DAX Calculations
-
-### Power BI Modeling
-- Variables (`VAR`)
-- `REMOVEFILTERS()`
-- Filter Context Management
-- Disconnected Tables Handling
-
-### Data Modeling
-- Fact & Dimension Design
-- Primary Keys / Foreign Keys
-- Referential Integrity Controls
+## 🛠️ Tech Stack  
+- SQL Server (T-SQL)  
+- Power BI (DAX, Data Modeling)  
+- Data Warehousing (Star Schema)  
+- Advanced SQL (CTEs, Window Functions)  
+- RFM Analysis  
 
 ---
 
-# 📐 Data Warehouse Architecture (Star Schema)
+## 🏗️ Data Model  
+A Star Schema was designed to optimize analytical performance:
 
-To optimize analytical query performance and minimize data redundancy across millions of event logs, the raw staging tables were transformed into a strict **Star Schema** model.
+- **Fact_Events** → user interactions (views, cart, purchases)  
+- **Dim_Users**  
+- **Dim_Products**  
+- **Dim_Time**  
 
-## Schema Review 
-<p align = "center" > <img src = "Screenshots/Schema.png" width = "500" </p>
----
-
-## Fact Tables
-
-### `Fact_Events`
-
-Central fact table containing:
-
-- User events (`view`, `cart`, `purchase`)
-- Product Keys
-- User Keys
-- Pricing metrics
+This structure enables fast and scalable analytics across millions of event logs.
 
 ---
 
-## Dimension Tables
+## ⚙️ Key Work Done  
 
-- `Dim_Products`
-- `Dim_Users`
-- `Dim_Time`
-
----
-
-## Database Diagram (DBML)
-
-```dbml
-Table Dim_Users {
-  User_key int [pk]
-  User_id int
-  User_session string
-}
-
-Table Dim_Products {
-  Product_key int [pk]
-  Product_id int
-  Category_id bigint
-  Category_code string
-  Brand string
-}
-
-Table Dim_Time {
-  Time_key int [pk]
-  Event_time_cleaned datetime2
-  Year int
-  MONTH int
-  DAY int
-  Dayofweek int
-  HOUR int
-}
-
-Table Fact_Events {
-  Event_key int [pk]
-  Product_key int
-  User_key int
-  Time_key int
-  Event_type string
-  Price float
-  Event_time_cleaned datetime2
-}
-
-Ref: Dim_Users.User_key < Fact_Events.User_key
-Ref: Dim_Products.Product_key < Fact_Events.Product_key
-Ref: Dim_Time.Time_key < Fact_Events.Time_key
-```
+### 1. Data Processing  
+- Cleaned and standardized raw event logs  
+- Removed duplicates using `ROW_NUMBER()`  
+- Converted timestamps and structured event data  
 
 ---
 
-# 🚀 Key Implementation Steps
-
-## 1. Data Staging & Preprocessing
-
-### Consistency Control
-
-Applied surrogate keys using:
-
-```sql
-IDENTITY(1,1)
-```
-
-alongside foreign key constraints to ensure reliable dimensional modeling.
-
-### Deduplication & Cleansing
-
-Implemented:
-
-```sql
-ROW_NUMBER() OVER(PARTITION BY ...)
-```
-
-to eliminate duplicate transactional logs and utilized:
-
-```sql
-TRY_CONVERT()
-```
-
-to sanitize raw UTC strings into precise `datetime2` formats.
+### 2. SQL Analytics  
+- Revenue and trend analysis using window functions (`LAG`, `NTILE`)  
+- Percentile-based customer and product performance analysis  
+- Funnel behavior analysis across user events  
 
 ---
 
-## 2. Business Logic Enrichment (SQL Views)
+### 3. Customer Segmentation (RFM)  
+Customers were segmented based on:
+- Recency  
+- Frequency  
+- Monetary value  
 
-### Customer Segmentation (RFM)
-
-Developed dynamic scoring using:
-
-```sql
-NTILE(5)
-```
-
-combined with:
-
-```sql
-DATEDIFF()
-```
-
-to bucket users into Recency, Frequency, and Monetary tiers.
-
-### Month-over-Month Analysis
-
-Built revenue growth metrics using:
-
-```sql
-LAG()
-```
-
-window functions over aggregated time dimensions to track financial momentum.
+Resulting in groups such as:
+- High-value customers  
+- At-risk customers  
+- One-time buyers  
 
 ---
 
-## 3. Business Intelligence Dashboard
-
-Designed a professional cosmetics-themed dashboard focusing on:
-
-- UI/UX
-- KPI visibility
-- Interactive cross-filtering
-- Performance optimization
-
-### Business Metrics Tracked
-
-- Revenue Performance Trends (MoM)
-- E-Commerce Conversion Funnel Drop-offs
-- RFM Customer Segment Volumes
-- Purchase Frequency Distributions
+### 4. Power BI Dashboard  
+Built an interactive dashboard featuring:
+- Revenue trends (MoM growth)  
+- Customer segmentation overview  
+- Product & brand performance  
+- Conversion funnel analysis  
+- KPI tracking  
 
 ---
 
-# 📈 Advanced SQL Analytics
-
-The project leverages advanced SQL techniques to generate business insights, including:
-
-- Common Table Expressions (CTEs)
-- Window Functions
-  - `NTILE()`
-  - `LAG()`
-  - `ROW_NUMBER()`
-- Percentile Analysis (`PERCENTILE_DISC`)
-- Revenue & Growth Analysis
-- Customer RFM Segmentation
-- Digital Funnel Conversion Analytics
+## 📊 Key Insights  
+- A small percentage of customers contribute the majority of revenue (Pareto effect)  
+- Significant drop-off occurs between product interaction and purchase  
+- High-value customers show strong repeat purchase behavior  
+- Certain product categories dominate revenue contribution  
 
 ---
 
-# 📊 Power BI Dashboard Features
-
-### Interactive KPI Cards
-
-Provide a quick overview of key business metrics.
-
-### Revenue Trend Line Charts
-
-DAX-optimized for efficient filter context management.
-
-### Top Brand Performance Bar Charts
-
-Highlight the highest-performing cosmetic brands.
-
-### Customer Segment Distribution
-
-Treemap visualization for RFM segments.
-
-### Funnel Conversion Tracking
-
-Step-by-step visualization of user journey drop-offs.
-
-### Dynamic Filtering
-
-Filter by:
-
-- Brand
-- Monthly cohorts
-
----
-## 💡 Business Recommendations
-
-Based on the analysis, the following strategies are recommended:
-
-**- Retention Strategy for High-Value Customers:** Implement loyalty programs and personalized offers for top RFM segments.
-**- Reactivation Campaigns:** Target “at-risk” customers with discounts and personalized messaging.
-**- Conversion Optimization:** Investigate and improve drop-off points in the customer journey.
-**- Marketing Budget Allocation:** Focus marketing efforts on high-performing customer segments and products.
-
----
-# 🎯 Business Value Delivered
-
-This solution enables stakeholders to:
-
-- Monitor revenue performance and growth velocity.
-- Identify severe bottlenecks in the checkout process.
-- Target high-value customers dynamically.
-- Reallocate marketing spend toward high-converting cosmetic brands.
-- Support data-driven marketing and UX optimization decisions.
+## 💡 Business Impact  
+This analysis enables:
+- Identification of high-value customer segments  
+- Improved marketing targeting and retention strategies  
+- Funnel optimization opportunities  
+- Data-driven decision-making for revenue growth  
 
 ---
 
-# 📈 Executive Results
+## 🚀 Conclusion  
+This project demonstrates how raw e-commerce event data can be transformed into actionable business insights using SQL and Power BI.
 
-For a complete business insights report, see:
-
-
-**[EXECUTIVE SUMMARY](Docs/EXECUTIVE_SUMMARY.md)**
-
+It combines data engineering, analytics, and business intelligence to support strategic decision-making.
 
 ---
 
-# 📁 Repository Structure
-
-```text
-Cosmetics-End-to-End-SQL-Analysis
-│
-├── README.md
-│
-├── Screenshots/
-│
-├── SQL Scripts/
-│   ├── 01_Staging_Table.sql
-│   ├── 02_Create_Views.sql
-│   ├── 03_Dim_and_fact_creation.sql
-│   ├── 04_Etl_data_loading.sql
-│   └── 05_Analysis.sql
-│
-├── Power BI/
-│
-└── docs/
-    └── EXECUTIVE_SUMMARY.md
-```
-
----
-
-# 👤 Author
-
-## Bahaa Mandour
-
-**Data Analyst | Project Manager | SQL & Power BI Enthusiast**
-
----
-
-### Connect with me
-
-- LinkedIn
-- GitHub
-
----
+## 👤 Author  
+**Bahaa Mandour**  
+Data Analyst | SQL | Power BI | Data Engineering Enthusiast  

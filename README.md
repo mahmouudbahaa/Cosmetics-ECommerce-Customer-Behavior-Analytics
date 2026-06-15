@@ -69,6 +69,8 @@ The final solution delivers executive-level insights for data-driven decision ma
 
 To optimize analytical query performance and minimize data redundancy across millions of event logs, the raw staging tables were transformed into a strict **Star Schema** model.
 
+## Schema Review 
+<p align = "center" > <img src = "Screenshots/Schema.png" width "500" </p>
 ---
 
 ## Fact Tables

@@ -22,7 +22,8 @@ The final solution delivers executive-level insights for data-driven decision ma
 
 ## 📷 Dashboard Preview
 
-![Executive Dashboard Overview](https://github.com/mahmouudbahaa/YOUR_REPO_NAME/raw/main/{05C5CD8A-82FC-4367-B687-C7B4B0E87B82}.png)
+<p align = "center" > <img src = "Screenshots/Dashboard.png" width = "500" 
+                        </p>
 
 ---
 

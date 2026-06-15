@@ -104,6 +104,12 @@ This analysis enables:
 - Funnel optimization opportunities  
 - Data-driven decision-making for revenue growth  
 
+# 📈 Executive Results
+
+For a complete business insights report, see: [Executive Summary](docs/EXECUTIVE_SUMMARY.md)
+
+---
+
 ---
 
 ## 🚀 Conclusion  

@@ -19,7 +19,18 @@ The pipeline covers:
 The final solution delivers executive-level insights for data-driven decision making.
 
 ---
+## 🎯 Business Problem Statement
 
+E-commerce businesses often struggle with understanding customer behavior beyond basic sales metrics. In this project, the goal is to analyze customer interactions in a cosmetics e-commerce platform to answer key business questions:
+
+- Why do customers drop off during the purchase journey?
+- Which customers are driving the majority of revenue?
+- How can we identify and prioritize high-value customers?
+- How can we segment customers to improve marketing and retention strategies?
+
+The objective is to transform raw behavioral data into actionable business insights that support marketing optimization, customer retention, and revenue growth.
+
+---
 ## 📷 Dashboard Preview
 
 <p align = "center" > <img src = "Screenshots/Dashboard.png" width = "500" 
@@ -264,7 +275,16 @@ Filter by:
 - Monthly cohorts
 
 ---
+## 💡 Business Recommendations
 
+Based on the analysis, the following strategies are recommended:
+
+**- Retention Strategy for High-Value Customers:** Implement loyalty programs and personalized offers for top RFM segments.
+**- Reactivation Campaigns:** Target “at-risk” customers with discounts and personalized messaging.
+**- Conversion Optimization:** Investigate and improve drop-off points in the customer journey.
+**- Marketing Budget Allocation:** Focus marketing efforts on high-performing customer segments and products.
+
+---
 # 🎯 Business Value Delivered
 
 This solution enables stakeholders to:

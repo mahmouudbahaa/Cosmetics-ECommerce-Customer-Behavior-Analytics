@@ -106,7 +106,7 @@ This analysis enables:
 
 # 📈 Executive Results
 
-For a complete business insights report, see: [Executive Summary](docs/EXECUTIVE_SUMMARY.md)
+For a complete business insights report, see: [Executive Summary](Docs/EXECUTIVE_SUMMARY.md)
 
 ---
 
